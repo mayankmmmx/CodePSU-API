@@ -4,10 +4,14 @@ import constants
 from db import insert_record
 
 def allowed_file(filename):
+    ''' Gets only allowed file names '''
+
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in constants.ALLOWED_FILE_TYPES
 
 def save_file(request):
+    ''' Saves file to folder '''
+
     file = request.files['file']
 
     if not file:
@@ -18,7 +22,12 @@ def save_file(request):
 
     file_name = secure_filename(file.filename)
     file_path = os.path.join(constants.FILE_PATH, file_name)
-    file.save(file_path)
+
+    try:
+        file.save(file_path)
+    except Exception as ex:
+        return ['-1', str(ex)]
+
     return ['0', file_path]     
 
 def create_request(raw_request):
