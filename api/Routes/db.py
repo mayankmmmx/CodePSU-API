@@ -2,7 +2,7 @@ import peewee
 import constants
 
 db = peewee.MySQLDatabase(constants.DB_NAME, user=constants.DB_USER_NAME,
-                            passwd=constants.DB_PASSWORD)
+                            passwd=constants.DB_PASSWORD, host=constants.DB_HOST)
 
 class RegistrationForm(peewee.Model):
     ''' Model for Registration '''

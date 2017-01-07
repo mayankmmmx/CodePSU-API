@@ -10,7 +10,7 @@ def index():
 
 @application.route('/register', methods=['POST'])
 def register():
-    if request.headers['auth_token'] == API_KEY:
+    if request.headers['Auth-Token'] == API_KEY:
         return jsonify(Routes.register.respond(request))
 
 if __name__ == "__main__":
