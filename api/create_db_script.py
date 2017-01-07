@@ -1,4 +1,4 @@
-import peewee as pw
+import peewee
 from Routes.db import RegistrationForm
 from Routes import constants
 
