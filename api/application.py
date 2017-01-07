@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import Routes.register
 from Routes.constants import API_KEY
 
 application = Flask(__name__)
