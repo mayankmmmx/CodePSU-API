@@ -12,5 +12,6 @@ Thumbs.db
 ####################
 api/uploads
 
+temp.py
 .pyc
 ..gitignore.un~
