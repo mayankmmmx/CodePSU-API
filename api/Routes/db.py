@@ -9,19 +9,19 @@ class RegistrationForm(peewee.Model):
 
     name = peewee.TextField()
     email = peewee.TextField()
-    linkedin = peewee.TextField()
-    github = peewee.TextField()
+    linkedin = peewee.TextField(null=True)
+    github = peewee.TextField(null=True)
     resume_link = peewee.TextField()
     can_share = peewee.TextField()
     highest_cs = peewee.TextField()
     tier = peewee.TextField()
-    allergies = peewee.TextField()
+    allergies = peewee.TextField(null=True)
     team_or_match = peewee.TextField()
     team_name = peewee.TextField()
-    teammate_1_name = peewee.TextField()
-    teammate_1_email = peewee.TextField()
-    teammate_2_name = peewee.TextField()
-    teammate_2_email = peewee.TextField()
+    teammate_1_name = peewee.TextField(null=True)
+    teammate_1_email = peewee.TextField(null=True)
+    teammate_2_name = peewee.TextField(null=True)
+    teammate_2_email = peewee.TextField(null=True)
 
     class Meta:
         database = db
