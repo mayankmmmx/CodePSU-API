@@ -4,30 +4,26 @@ import constants
 from db import insert_record
 
 def allowed_file(filename):
-    ''' Gets only allowed file names '''
-
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in constants.ALLOWED_FILE_TYPES
 
 def save_file(request):
-    ''' Saves file to folder '''
-
     file = request.files['file']
-
+    
     if not file:
         return ['-1', 'Please attach file']
 
     if not allowed_file(file.filename):
         return ['-1', 'Incorrect file type']
-
+    
     file_name = secure_filename(file.filename)
     file_path = os.path.join(constants.FILE_PATH, file_name)
-
+    
     try:
         file.save(file_path)
     except Exception as ex:
         return ['-1', str(ex)]
-
+    
     return ['0', file_path]     
 
 def create_request(raw_request):
@@ -35,19 +31,19 @@ def create_request(raw_request):
 
     # Get request as json
     request = raw_request.form
-
     registrant_info = {}
     registrant_info['name'] = request.get('name')
     registrant_info['email'] = request.get('email')
+    registrant_info['shirt'] = request.get('shirt')
     registrant_info['linkedin'] = request.get('linkedin')
     registrant_info['github'] = request.get('github')
     resume = save_file(raw_request)
-
+    
     # Make sure file was uploaded successfully
     if resume[0] is '-1':
         return ['-1', resume[1]]
 
-    registrant_info['resume_file_path'] = 'hi'#resume[1]
+    registrant_info['resume_file_path'] = resume[1]
     registrant_info['can_share_info'] = request.get('can_share_info')
     registrant_info['highest_cs_course'] = request.get('highest_cs_course')
     registrant_info['tier'] = request.get('tier')
@@ -67,9 +63,9 @@ def create_request(raw_request):
     return ['0', 'Successfully registered for CodePSU!']
 
 def respond(data):
-	message = create_request(data)
-
-	return {
+    message = create_request(data)
+   
+    return {
         'status': message[0],
-		'message': message[1]
-	}
+        'message': message[1]
+    }

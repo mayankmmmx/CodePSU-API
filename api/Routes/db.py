@@ -2,13 +2,14 @@ import peewee
 import constants
 
 db = peewee.MySQLDatabase(constants.DB_NAME, user=constants.DB_USER_NAME,
-                            passwd=constants.DB_PASSWORD, host=constants.DB_HOST)
+                            passwd=constants.DB_PASSWORD)
 
 class RegistrationForm(peewee.Model):
     ''' Model for Registration '''
 
     name = peewee.TextField()
     email = peewee.TextField()
+    shirt = peewee.TextField()
     linkedin = peewee.TextField(null=True)
     github = peewee.TextField(null=True)
     resume_link = peewee.TextField()
@@ -32,6 +33,7 @@ def insert_record(registration_info):
     record = RegistrationForm(
                 name=registration_info['name'],
                 email=registration_info['email'],
+                shirt=registration_info['shirt'],
                 linkedin=registration_info['linkedin'],
                 github=registration_info['github'],
                 resume_link=registration_info['resume_file_path'],
